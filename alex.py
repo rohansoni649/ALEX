@@ -5,6 +5,7 @@ import webbrowser
 import os
 import pyjokes
 import ctypes
+import winshell
 
 #to extract the current hour and wish accordingly
 hour = datetime.datetime.now().hour
@@ -108,4 +109,18 @@ if __name__ == "__main__":
             winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True) 
             pyttsx3.speak("Recycle Bin Emptied")
             
+            #to hold the Alex for listening any commands (using time library)
+        elif "don't listen" in query or "stop listening" in query: 
+            pyttsx3.speak("For how much time you want to stop jarvis from listening commands: ")
+            a = int(input("For how much time you want to stop Alex from listening commands (Enter the seconds): "))
+            #a = int(takeCommand())
+            #print(a)
+            time.sleep(a)
+            
+            elif 'is love' in query:
+            pyttsx3.speak("It's the 7th sense that destroys all the sense")
+
+        elif 'reason for you' in query or 'why you have been created'in query:
+            pyttsx3.speak("I have been created for a big mission. I am been programmed not to harm any Human")
+            pyttsx3.speak("May be!!")
             
