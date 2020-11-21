@@ -3,6 +3,7 @@ import datetime
 import wikipedia
 import webbrowser
 import os
+import smtplib
 import pyjokes
 import ctypes
 import winshell
@@ -41,6 +42,14 @@ def takeCommand():
         print("Can you please say that again......")
         return "None"
     return query
+
+def sendEmail(to, content):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.login('rohansoni649@gmail.com', 'rohansoni9610509956') 
+    server.sendmail('rohansoni649@gmail.com', to, content)
+    server.close()
     
 if __name__ == "__main__":
     while True:
@@ -65,6 +74,14 @@ if __name__ == "__main__":
         elif 'open stackoverflow' in query:
             webbrowser.open('www.stackoverflow.com')
             
+        elif 'play music' in query:
+            music_dir = 'C:\\Users\\hp\\Downloads\\Music'
+            #list the contents of the directory
+            songs = os.listdir(music_dir)
+            ##print(songs)
+            #play the first content of the list
+            os.startfile(os.path.join(music_dir,songs[0]))
+            
         elif 'code' in query:
             #to open vscode program
             # // is used to eliminate any escape charcter (space in between)
@@ -73,7 +90,22 @@ if __name__ == "__main__":
             elif 'how are you' in query:
             pyttsx3.speak("I am fine. Thank You!")
             pyttsx3.speak("How are you?")
+            
+        elif 'email to rohan' in query or 'mail to rohan' in query:
+            try:
+                pyttsx3.speak("What should I say in mail")
+                content = takeCommand()
+                to = "rohansoni649@gmail.com"
+                sendEmail(to, content)
+                pyttsx3.speak("Email has been sent")
+            except Exception as e:
+                print(e)
+                pyttsx3.speak("Sorry Rohan...but I am not able to understand")
 
+        elif 'how are you' in query:
+            pyttsx3.speak("I am fine. Thank You!")
+            pyttsx3.speak("How are you?")
+        
         elif 'fine' in query or 'good' in query:
             pyttsx3.speak("It's good to know that you are fine")
 
@@ -166,4 +198,31 @@ if __name__ == "__main__":
         
         elif 'what can you' in query:
             pyttsx3.speak('Alex two point o at your service ')
+            
+            elif 'send an sms' in query or 'send a message' in query:   
+            #(pip install twilio)
+            # from twilio.rest import Client
+            # Your Account Sid and Auth Token from twilio.com / console 
+            account_sid = 'AC66c45659969349c3e90baa16bf59832d'
+            auth_token = '3586f53e46d70a42b36b35795c90e399'
+
+            client = Client(account_sid, auth_token) 
+
+            ''' Change the value of 'from' with the number 
+            received from Twilio and the value of 'to' 
+            with the number in which you want to send message.'''
+            pyttsx3.speak('What message you want to send.....')
+            msg = takeCommand()
+            message = client.messages.create(from_='+18182755710', body = msg, to ='+919610509956') 
+            pyttsx3.speak("Message sent succesfully")
+            print(message.sid) 
+
+        elif 'I love you' in query:
+            pyttsx3.speak("It is difficult to understand")
+
+        elif 'the time' or 'current time' in query:
+            #to extract the curren time
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            pyttsx3.speak(f'The time is {strTime}')
+            exit()
             
