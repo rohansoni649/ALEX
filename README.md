@@ -1,2 +1,2 @@
 # ALEX
-A voice Assistant which makes your Windows OS experience much easier.
+Your own Genie which makes your Windows OS experience much easier.
