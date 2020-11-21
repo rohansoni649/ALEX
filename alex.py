@@ -1,6 +1,7 @@
 import pyttsx3
 import datetime
 import wikipedia
+import webbrowser
 
 #to extract the current hour and wish accordingly
 hour = datetime.datetime.now().hour
@@ -46,3 +47,10 @@ if __name__ == "__main__":
             pyttsx3.speak("According to wikipedia....")
             print(results)
             pyttsx3.speak(results)
+        #to open webbrowser
+        elif 'open youtube' in query:
+            webbrowser.open('www.youtube.com')
+        elif 'open google' in query:
+            webbrowser.open('www.google.com')
+        elif 'open stackoverflow' in query:
+            webbrowser.open('www.stackoverflow.com')
