@@ -1,7 +1,7 @@
 # ALEX
 Your own Genie which makes your Windows OS experience much easier.
 
-#The Problem it Solves
+__The Problem it Solves__
 
 ALEX is a friendly voice assistant cum human which not only understands from the Technical aspect but also from Human feelings. It is a Windows OS manager that helps the user to automate their work by using voice commands. It can be helpful for new users to use the operating system without knowing any steps. It is also programmed for the kids to get the answers to the general knowledge-based question.
 It makes it easier for the user to interact with their machine just by their voice.
