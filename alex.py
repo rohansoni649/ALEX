@@ -2,6 +2,8 @@ import pyttsx3
 import datetime
 import wikipedia
 import webbrowser
+import os
+import pyjokes
 
 #to extract the current hour and wish accordingly
 hour = datetime.datetime.now().hour
@@ -54,3 +56,33 @@ if __name__ == "__main__":
             webbrowser.open('www.google.com')
         elif 'open stackoverflow' in query:
             webbrowser.open('www.stackoverflow.com')
+            
+        elif 'code' in query:
+            #to open vscode program
+            # // is used to eliminate any escape charcter (space in between)
+            codePath = "C:\\Users\\hp\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            os.startfile(codePath)
+            elif 'how are you' in query:
+            pyttsx3.speak("I am fine. Thank You!")
+            pyttsx3.speak("How are you?")
+
+        elif 'fine' in query or 'good' in query:
+            pyttsx3.speak("It's good to know that you are fine")
+
+        elif "what's your name" in query or "what is your name" in query:
+            pyttsx3.speak("Everyone calls me Alex!")
+
+        elif 'exit' in query:
+            pyttsx3.speak("Thank you for me giving me your time.")
+            pyttsx3.speak("Bye")
+            exit()
+        
+        elif 'who created you' in query or 'who made you' in query:
+            pyttsx3.speak("I have been created by Rohan Soni")
+        
+        #pyjoke is used to get eandom jokes  
+        elif 'jokes' in query or 'joke' in query:
+            #storing the joke in a variable to make it same for the whole condition
+            joke = (pyjokes.get_joke())
+            print(joke)
+            pyttsx3.speak(joke)
