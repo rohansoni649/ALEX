@@ -1,5 +1,6 @@
 import pyttsx3
 import datetime
+import wikipedia
 
 #to extract the current hour and wish accordingly
 hour = datetime.datetime.now().hour
@@ -30,7 +31,18 @@ def takeCommand():
         return "None"
     return query
     
-    if __name__ == "__main__":
+if __name__ == "__main__":
     while True:
         #lower case will be taked into consideration for seaching results properly
         query = takeCommand().lower()
+        
+        #to search in wikipedia 
+        if 'wikipedia' in query:
+            pyttsx3.speak("Searching wikipedia....")
+            #replace the wikipeadia keyword with the blank
+            query = query.replace("wikipedia","")
+            #extract 2 sentences from the wikipedia page summary
+            results = wikipedia.summary(query, sentences=2)
+            pyttsx3.speak("According to wikipedia....")
+            print(results)
+            pyttsx3.speak(results)
