@@ -4,6 +4,7 @@ import wikipedia
 import webbrowser
 import os
 import pyjokes
+import ctypes
 
 #to extract the current hour and wish accordingly
 hour = datetime.datetime.now().hour
@@ -86,3 +87,25 @@ if __name__ == "__main__":
             joke = (pyjokes.get_joke())
             print(joke)
             pyttsx3.speak(joke)
+            
+            elif 'why you came to this world' in query:
+            pyttsx3.speak("Thanks to Rohan. Rest is a secret")
+
+        elif 'who are you' in query:
+            pyttsx3.speak("I am Alex.A Virtual Assistant created by Rohan Soni")
+
+        #to change the desktop background (using ctype libaray)
+        elif 'change background' in query or 'change my desktop background' in query:
+            ctypes.windll.user32.SystemParametersInfoW(20,0,"C:\\Users\\hp\\Desktop\\Jarvis-The Windows Assistant\\2020-08-28 04.43.58 1.jpg",0)    
+
+        #to lock the device (using ctype library)
+        elif 'lock my window' in query or 'lock window' in query: 
+            pyttsx3.speak("locking the device") 
+            ctypes.windll.user32.LockWorkStation()
+
+        #to empty recycle bin (using winshell library)
+        elif 'empty recycle bin' in query:
+            winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True) 
+            pyttsx3.speak("Recycle Bin Emptied")
+            
+            
