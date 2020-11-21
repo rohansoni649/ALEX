@@ -6,6 +6,12 @@ import os
 import pyjokes
 import ctypes
 import winshell
+import wolframalpha
+import time
+import subprocess
+from twilio.rest import Client 
+import speech_recognition as sr
+
 
 #to extract the current hour and wish accordingly
 hour = datetime.datetime.now().hour
@@ -119,8 +125,45 @@ if __name__ == "__main__":
             
             elif 'is love' in query:
             pyttsx3.speak("It's the 7th sense that destroys all the sense")
+            
+            #most asked question from wolframalpha (using wolframalpha library)
+        elif "what is" in query or "who is" in query: 
+            app_id = '84WKWE-Q7PYVH6EU5'
+            client = wolframalpha.Client(app_id) 
+            res = client.query(query)  
+            try: 
+                print (next(res.results).text) 
+                pyttsx3.speak (next(res.results).text) 
+            except StopIteration: 
+                print ("No results")
 
         elif 'reason for you' in query or 'why you have been created'in query:
             pyttsx3.speak("I have been created for a big mission. I am been programmed not to harm any Human")
             pyttsx3.speak("May be!!")
+            
+            elif 'write a note' in query:
+            pyttsx3.speak("What should I write in the note")
+            note = takeCommand()
+            # file handling (opening a file in writable format)
+            file = open('note.txt','w')
+            pyttsx3.speak("Should I include date and time")
+            dt = takeCommand()
+            if 'yes' in dt or 'sure' in dt or 'include it'in dt:
+                srtTime = datetime.datetime.now().strftime("%H:%M:%S")
+                file.write(srtTime)
+                file.write(" :- ")
+                file.write(note)
+                pyttsx3.speak('The note has been created')
+            else:
+                file.write(note)
+                pyttsx3.speak('The note has been created')
+
+        elif 'show notes' in query or 'show note' in query:
+            pyttsx3.speak('Showing the notes')
+            #file handling (openinng a file in readable format)
+            file=open('note.txt','r')
+            print(file.read())
+        
+        elif 'what can you' in query:
+            pyttsx3.speak('Alex two point o at your service ')
             
